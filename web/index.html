@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="MedGemma Guardian - IA de Extração e Conformidade Clínica Offline">
+    <title>MedGemma Guardian | Clinical Intelligence</title>
+    <link rel="stylesheet" href="index.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div id="critical-alert-bar">⚠️ CRITICAL COMPLIANCE RISK DETECTED</div>
+
+    <nav class="glass-panel"
+        style="margin: 0; padding: 0.75rem 2rem; display: flex; justify-content: space-between; align-items: center; border-radius: 0; border-top: none; border-left: none; border-right: none;">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+            <div
+                style="width: 28px; height: 28px; background: var(--secondary); border-radius: 2px; display: flex; align-items: center; justify-content: center; color: var(--primary); font-weight: 900; font-size: 0.8rem;">
+                MG</div>
+            <h1 style="font-size: 1.1rem; text-transform: uppercase; letter-spacing: 0.1em;">MedGemma<span
+                    style="color: var(--secondary)">Guardian</span></h1>
+        </div>
+        <div style="display: flex; gap: 0.5rem; cursor: pointer;">
+            <span class="nav-item active" id="nav-mdu">Audit Console</span>
+            <span class="nav-item" id="nav-safety">Safety Protocols</span>
+            <span class="nav-item" id="nav-registry">Local History</span>
+        </div>
+    </nav>
+
+    <main style="max-width: 1400px; margin: 2rem auto; padding: 0 2rem;">
+        <!-- MDU Dashboard Section -->
+        <div id="section-mdu" class="tab-content active">
+            <header class="animate-fade"
+                style="margin-bottom: 2.5rem; text-align: left; border-left: 4px solid var(--secondary); padding-left: 1.5rem;">
+                <h2 style="font-size: 1.8rem; margin-bottom: 0.25rem;">Medical Document Understanding</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; font-family: var(--font-mono);">[HAI-DEF]
+                    Privacy-Preserving Clinical Extraction & Safety Audit</p>
+            </header>
+
+            <div style="display: grid; grid-template-columns: 1fr 1.2fr; gap: 1.5rem; align-items: start;">
+                <!-- Upload Section -->
+                <section class="glass-panel card animate-fade" id="upload-section"
+                    style="background: rgba(30, 41, 59, 0.4);">
+                    <h3
+                        style="margin-bottom: 1.5rem; font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--secondary); display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.2rem;">📥</span> Data Ingestion
+                    </h3>
+                    <div
+                        style="background: rgba(15, 23, 42, 0.4); border: 1px solid var(--ui-border); padding: 1.5rem; border-radius: 2px;">
+                        <p
+                            style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1rem; text-transform: uppercase;">
+                            Clinical Notes / EHR Fragments</p>
+                        <textarea id="clinical-notes"
+                            placeholder="Paste medical notes, prescriptions, or vitals here..."
+                            style="width: 100%; min-height: 250px; padding: 1rem; background: rgba(2, 6, 23, 0.5); border: 1px solid var(--ui-border); border-radius: 2px; color: var(--text-main); font-family: var(--font-mono); font-size: 0.85rem; margin-bottom: 1.5rem; outline: none; resize: vertical;"></textarea>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <button class="btn-primary" id="analyze-btn">Start Audit</button>
+                            <button class="btn-secondary" id="upload-btn">Import Report (PDF)</button>
+                            <input type="file" id="file-input" accept=".pdf" style="display: none;">
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Results Section -->
+                <section class="glass-panel card animate-fade" id="results-section" style="min-height: 500px;">
+                    <div
+                        style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; border-bottom: 1px solid var(--ui-border); padding-bottom: 1rem;">
+                        <h3
+                            style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent);">
+                            <span style="font-size: 1.2rem;">🛡️</span> Neural Safety Audit
+                        </h3>
+                        <button class="btn-secondary" id="export-btn"
+                            style="font-size: 0.7rem; padding: 0.3rem 0.6rem;">
+                            Export FHIR JS
+                        </button>
+                    </div>
+
+                    <div id="status-indicator" style="margin-bottom: 1.5rem;">
+                        <div
+                            style="padding: 1rem; border: 1px solid var(--ui-border); background: rgba(15, 23, 42, 0.3); text-align: center; font-size: 0.8rem; color: var(--text-muted); font-family: var(--font-mono);">
+                            SYSTEM READY // WAITING FOR INGESTION
+                        </div>
+                    </div>
+
+                    <div id="extracted-data" style="font-size: 0.9rem;">
+                        <div style="color: var(--text-muted); text-align: center; margin-top: 4rem; opacity: 0.5;">
+                            <div style="font-size: 3rem; margin-bottom: 1rem;">⌨️</div>
+                            <p style="font-family: var(--font-mono); font-size: 0.75rem;">AWAITING DATA STREAM...</p>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Safety Protocols Section -->
+        <div id="section-safety" class="tab-content">
+            <header
+                style="margin-bottom: 3rem; text-align: left; border-left: 4px solid var(--accent); padding-left: 1.5rem;">
+                <h2 style="font-size: 1.8rem; margin-bottom: 0.25rem;">Validated Clinical Protocols</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; font-family: var(--font-mono);">[v2.1] Mandatory
+                    safety boundaries defined by HAI-DEF</p>
+            </header>
+            <div class="glass-panel card animate-fade" style="max-width: 800px; background: rgba(30, 41, 59, 0.4);">
+                <div style="display: grid; gap: 1rem;">
+                    <div class="data-card"
+                        style="border-left: 4px solid var(--error); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h4
+                                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+                                Paracetamol Toxicity Threshold</h4>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">Maximum daily cumulative dose
+                                cross-referenced from all ingestion sources.</p>
+                        </div>
+                        <span class="badge" style="background: var(--error); color: white;">4000mg / 24h</span>
+                    </div>
+                    <div class="data-card"
+                        style="border-left: 4px solid var(--secondary); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h4
+                                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+                                Pediatric Dosage Validation</h4>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">Mandatory weight-based verification
+                                for patients under established pediatric age.</p>
+                        </div>
+                        <span class="badge" style="background: var(--secondary); color: white;">MANDATORY</span>
+                    </div>
+                    <div class="data-card"
+                        style="border-left: 4px solid var(--warning); display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h4
+                                style="font-size: 0.9rem; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 0.25rem;">
+                                Critical Fever Response</h4>
+                            <p style="color: var(--text-muted); font-size: 0.8rem;">Priority triage activation for
+                                temperatures exceeding defined clinical baseline.</p>
+                        </div>
+                        <span class="badge" style="background: var(--warning); color: var(--primary);">> 39.0°C</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Local Registry Section -->
+        <div id="section-registry" class="tab-content">
+            <header
+                style="margin-bottom: 3rem; text-align: left; border-left: 4px solid var(--text-muted); padding-left: 1.5rem;">
+                <h2 style="font-size: 1.8rem; margin-bottom: 0.25rem;">On-Device Registry</h2>
+                <p style="color: var(--text-muted); font-size: 0.95rem; font-family: var(--font-mono);">Recent
+                    extraction metadata // Full Privacy Protection</p>
+            </header>
+            <div id="registry-list" class="glass-panel card animate-fade"
+                style="padding: 1.5rem; background: rgba(30, 41, 59, 0.4);">
+                <div
+                    style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--text-muted); text-align: center; padding: 4rem;">
+                    NO LOCAL RECORDS IN SECURE STORAGE.
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="main.js"></script>
+</body>
+
+</html>

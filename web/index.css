@@ -1,0 +1,238 @@
+:root {
+    /* Color Palette - Clinical HUD (High Contrast & Precision) */
+    --primary: #020617;
+    /* Deep Midnight */
+    --secondary: #0ea5e9;
+    /* Medical Blue */
+    --secondary-glare: rgba(14, 165, 233, 0.15);
+    --accent: #10b981;
+    /* Clinical Mint */
+    --error: #f43f5e;
+    /* Emergency Red */
+    --warning: #f59e0b;
+    /* Alert Amber */
+    --bg-main: #0f172a;
+    --bg-card: #1e293b;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --ui-border: rgba(148, 163, 184, 0.2);
+    --ui-border-active: rgba(14, 165, 233, 0.5);
+
+    /* Typography - Monospace for technical feel where needed */
+    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    --font-mono: 'JetBrains Mono', 'Fira Code', monospace;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.nav-item {
+    padding: 0.5rem 1rem;
+    border: 1px solid transparent;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    color: var(--text-muted);
+}
+
+.nav-item:hover {
+    color: var(--text-main);
+    background: var(--secondary-glare);
+}
+
+.nav-item.active {
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    background: var(--secondary-glare);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-main);
+    background-color: var(--primary);
+    color: var(--text-main);
+    line-height: 1.5;
+    background-image:
+        radial-gradient(circle at 2px 2px, rgba(255, 255, 255, 0.02) 1px, transparent 0);
+    background-size: 24px 24px;
+    min-height: 100vh;
+}
+
+/* Clinical HUD Components */
+.glass-panel {
+    background: var(--bg-card);
+    border: 1px solid var(--ui-border);
+    border-radius: 4px;
+    /* Sharp corners for technical feel */
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-panel::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--ui-border-active), transparent);
+    opacity: 0.5;
+}
+
+.card {
+    padding: 1.5rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Typography Helpers */
+h1 {
+    font-weight: 800;
+    letter-spacing: -0.025em;
+    color: var(--text-main);
+}
+
+h2 {
+    font-weight: 700;
+    color: var(--text-main);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+}
+
+/* Animation System */
+@keyframes diagnosticScan {
+    0% {
+        transform: translateY(0);
+        opacity: 0;
+    }
+
+    50% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+}
+
+@keyframes glitchReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.98);
+        filter: brightness(2);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+        filter: brightness(1);
+    }
+}
+
+.animate-fade {
+    animation: glitchReveal 0.4s cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+}
+
+/* Buttons */
+.btn-primary {
+    background: var(--secondary);
+    color: var(--primary);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 2px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary:hover {
+    filter: brightness(1.2);
+    box-shadow: 0 0 15px var(--secondary-glare);
+}
+
+.btn-primary:disabled {
+    background: var(--text-muted);
+    cursor: not-allowed;
+}
+
+/* Critical Alert Bar */
+#critical-alert-bar {
+    display: none;
+    background: var(--error);
+    color: white;
+    text-align: center;
+    padding: 0.5rem;
+    font-weight: 800;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    border-bottom: 2px solid rgba(0, 0, 0, 0.2);
+    animation: slideDown 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--secondary);
+    border: 1px solid var(--secondary);
+    padding: 0.5rem 1rem;
+    border-radius: 2px;
+    font-weight: 600;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background: var(--secondary-glare);
+}
+
+.badge {
+    padding: 0.25rem 0.6rem;
+    border-radius: 2px;
+    font-size: 0.7rem;
+    font-weight: 800;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    font-family: var(--font-mono);
+}
+
+/* Technical Data Cards */
+.data-card {
+    background: rgba(15, 23, 42, 0.5);
+    border-left: 2px solid var(--ui-border);
+    padding: 1rem;
+    margin-bottom: 0.75rem;
+    transition: all 0.2s ease;
+}
+
+.data-card:hover {
+    border-left-color: var(--secondary);
+    background: rgba(15, 23, 42, 0.8);
+}
