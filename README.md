@@ -19,12 +19,6 @@
 - 📋 **FHIR Compatible**: Structured JSON output for healthcare interoperability
 - 👨‍⚕️ **Human-in-the-Loop**: Empowers clinicians with transparent safety audits
 
-## 🖼️ Screenshots
-
-<p align="center">
-  <img src="docs/screenshot-dashboard.png" alt="Dashboard" width="800"/>
-</p>
-
 ## 🚀 Quick Start
 
 ### Prerequisites
@@ -37,7 +31,7 @@
 
 ```bash
 # Clone the repository
-git clone https://github.com/clenio77/MedGemma-Guardian.git
+git clone https://github.com/cleniooliveiramoura/MedGemma-Guardian.git
 cd MedGemma-Guardian
 
 # Create virtual environment
@@ -129,7 +123,7 @@ Patient: "Take 10 tablets of 500mg Acetaminophen daily"
 
 - **Clenio Afonso de Oliveira Moura** — *Data Scientist & AI Engineer*
   - Lead Developer | Full-stack implementation | MedGemma integration
-  - GitHub: [@clenio77](https://github.com/clenio77)
+  - GitHub: [@cleniooliveiramoura](https://github.com/cleniooliveiramoura)
 
 ## 📚 References
 
